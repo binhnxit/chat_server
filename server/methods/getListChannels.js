@@ -1,5 +1,8 @@
 Meteor.methods({
   getListChannels: function () {
-  	return Channels.find().fetch();
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+  	return Channels.find();
   }
 })
